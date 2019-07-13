@@ -27,7 +27,7 @@ exports.sourceNodes = ({actions}) => {
         type Event implements Node @dontInfer{
             id: ID!
             name: String!
-            locaiton: String!
+            location: String!
             startDate: Date! @dateformat @proxy(from: "start_date")
             endDate: Date! @dateformat @proxy(from: "end_date")
             url: String!
@@ -76,7 +76,7 @@ exports.createPages = async({actions, graphql, reporter}) => {
 
     const result = await graphql(`
         query MyQuery {
-            allEvent {
+            allEvent(sort: {fields: startDate, order: ASC}) {
                 nodes {
                     name
                     slug
