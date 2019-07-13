@@ -20,7 +20,7 @@ const EventList = ({events}) => (
                                 day: 'numeric',
                                 year: 'numeric',
                             })
-                        }
+                        } in {event.location}
                     </li>
                 ))
             }

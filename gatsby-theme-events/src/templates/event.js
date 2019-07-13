@@ -1,8 +1,30 @@
 import React from 'react'
+import {graphql} from 'gatsby'
+import Layout from '../components/layout'
+import Event from '../components/event'
 
-const eventTemplate = () => {
+export const query = graphql`
+    query($eventID: String!){
+        event(id: { eq: $eventID }){
+            name
+            url
+            startDate(formatString: "MMMM D, YYYY")
+            endDate(formatString: "MMMM D, YYYY")
+            location
+            slug
+        }
+    }
+`;
+
+
+
+
+
+const eventTemplate = ({ data: {event} }) => {
     return (
-        <h1>Single event template</h1>
+        <Layout>
+            <Event {...event} />
+        </Layout>
     )
 }
 

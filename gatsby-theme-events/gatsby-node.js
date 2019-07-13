@@ -78,6 +78,7 @@ exports.createPages = async({actions, graphql, reporter}) => {
         query MyQuery {
             allEvent(sort: {fields: startDate, order: ASC}) {
                 nodes {
+                    id
                     name
                     slug
                     url
