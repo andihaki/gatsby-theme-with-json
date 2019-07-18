@@ -10,8 +10,8 @@ const fs = require('fs');
  * data directory exists
  * if not then create one
  */
-exports.onPreBootstrap = ({reporter}) => {
-    const contentPath = 'data';
+exports.onPreBootstrap = ({reporter}, options) => {
+    const contentPath = options.contentPath || 'data';
 
     if (!fs.existsSync(contentPath)){
         reporter.info(`creating the ${contentPath} directory`);
@@ -39,9 +39,9 @@ exports.sourceNodes = ({actions}) => {
  * Define resolver for any 
  * custom fields (slug)
  */
-exports.createResolvers = ({createResolvers}) => {
+exports.createResolvers = ({createResolvers}, options) => {
     
-    const basePath = '/';
+    const basePath = options.basePath || '/';
     
     const slugify = str => {
         const slug = str
@@ -63,11 +63,11 @@ exports.createResolvers = ({createResolvers}) => {
 }
 /**
  * Query for event and
- * create pages
+ * create single event pages and llist page
  */
-exports.createPages = async({actions, graphql, reporter}) => {
+exports.createPages = async({actions, graphql, reporter}, options) => {
     
-    const basePath = '/';
+    const basePath = options.basePath || '/';
     
     actions.createPage({
         path: basePath,
